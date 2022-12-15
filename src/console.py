@@ -17,42 +17,43 @@ if __name__ == '__main__':
           "7 - Прервать программу\n")
     while inWork:
         choice = int(input("Введите номер действия: "))
-        match choice:
-            case 1:
+        if choice == 1:
                 text = input("Введите текст заметки: ")
                 token = input("Введите токен: ")
                 response = requests.post(f"http://{HOST}:{PORT}" + "/createNote", params={"text": text, "token": token})
                 print(f"Status code: {response.status_code}")
                 print(f"Response body: {response.text}")
-            case 2:
+        elif choice == 2:
                 note_id = int(input("Введите id заметки: "))
                 token = input("Введите токен: ")
                 response = requests.get(f"http://{HOST}:{PORT}" + "/getNoteText", params={"id": note_id, "token": token})
                 print(f"Status code: {response.status_code}")
                 print(f"Response body: {response.text}")
-            case 3:
+        elif choice == 3:
                 note_id = int(input("Введите id заметки: "))
                 token = input("Введите токен: ")
                 response = requests.get(f"http://{HOST}:{PORT}" + "/getNoteInfo", params={"note_id": note_id, "token": token})
                 print(f"Status code: {response.status_code}")
                 print(f"Response body: {response.text}")
-            case 4:
+        elif choice == 4:
                 note_id = int(input("Введите id заметки: "))
                 token = input("Введите токен: ")
                 response = requests.delete(f"http://{HOST}:{PORT}" + "/removeNote", params={"note_id": note_id, "token": token})
                 print(f"Status code: {response.status_code}")
                 print(f"Response body: {response.text}")
-            case 5:
+        elif choice == 5:
                 note_id = int(input("Введите id заметки: "))
                 text = input("Введите текст заметки: ")
                 token = input("Введите токен: ")
-                response = requests.put(f"http://{HOST}:{PORT}" + "/updateNote", params={"note_id": note_id, "text": text, "token": token})
+                response = requests.patch(f"http://{HOST}:{PORT}" + "/updateNote", params={"note_id": note_id, "text": text, "token": token})
                 print(f"Status code: {response.status_code}")
                 print(f"Response body: {response.text}")
-            case 6:
+        elif choice == 6:
                 token = input("Введите токен: ")
                 response = requests.get(f"http://{HOST}:{PORT}" + "/getNotesList", params={"token": token})
                 print(f"Status code: {response.status_code}")
                 print(f"Response body: {response.text}")
-            case 7:
+        elif choice == 7:
                 inWork = False
+        else:
+            print("Wrong choice")
